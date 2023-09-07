@@ -11,4 +11,4 @@ spec:
               serviceName: frontend-service
               servicePort: 80
               # 여러분의 app path 를 넣어주세요.
-              path: k3d5b0c62ef97a
+              path: /k3d5b0c62ef97a(/|$)(.*)
