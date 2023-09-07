@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useGetMyNFTs from "../../hooks/useGetMyNFTs";
-import Empty from "../Empty";
-import Loading from "../Loading";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useGetMyNFTs from '../../hooks/useGetMyNFTs';
+import Empty from '../Empty';
+import Loading from '../Loading';
 
 import {
 	Container,
@@ -15,7 +15,8 @@ import {
 	ItemTextBox,
 	ItemTextWrap,
 	ItemWrap,
-} from "./styled";
+} from './styled';
+import styled from 'styled-components';
 
 const MyItem = () => {
 	const [myNFTs, setMyNFTs] = useState([] as NFTItem[]);
@@ -27,47 +28,50 @@ const MyItem = () => {
 	};
 
 	useEffect(() => {
-		if(!!getMyNFTs.data) setMyNFTs(getMyNFTs.data.items.sort((a,b) => (Number(b.tokenId) - Number(a.tokenId))))
-	}, [getMyNFTs.isFetching])
+		if (!!getMyNFTs.data)
+			setMyNFTs(getMyNFTs.data.items.sort((a, b) => Number(b.tokenId) - Number(a.tokenId)));
+	}, [getMyNFTs.isFetching]);
 
-	if (getMyNFTs.data?.count === "0")
+	if (getMyNFTs.data?.count === '0')
 		return (
 			<>
 				<Empty />
 			</>
 		);
 
-	if(getMyNFTs.isFetching || getMyNFTs.isLoading) return <Loading />
-	
+	if (getMyNFTs.isFetching || getMyNFTs.isLoading) return <Loading />;
+
 	return (
 		<>
 			<Container>
+				<Text>판매중인 상품들</Text>
 				<Content>
 					{myNFTs.map((item) => {
-						if(item.tokenId === "unknown" && !getMyNFTs.isFetching) getMyNFTs.refetch()
-						return <ItemWrap key={item.id} onClick={() => handleOnClickItem(item.id)}>
-							<ItemImgBox>
-								<ItemImg src={item.metadata.image} />
-							</ItemImgBox>
-							<Divider />
-							<ItemTextWrap>
-								<ItemTextBox>
-									<ItemH1>{item.metadata.name}</ItemH1>
-								</ItemTextBox>
-								<ItemTextBox>
-									<ItemH3>Token ID</ItemH3>
-									<ItemH3>#{item.tokenId}</ItemH3>
-								</ItemTextBox>
-								<ItemTextBox>
-									<ItemH3>Edition No.</ItemH3>
-									<ItemH3>
-										#{item.editionNo} / {item.metadata.editionMax}
-									</ItemH3>
-								</ItemTextBox>
-							</ItemTextWrap>
-						</ItemWrap>
-					}
-					)}
+						if (item.tokenId === 'unknown' && !getMyNFTs.isFetching) getMyNFTs.refetch();
+						return (
+							<ItemWrap key={item.id} onClick={() => handleOnClickItem(item.id)}>
+								<ItemImgBox>
+									<ItemImg src={item.metadata.image} />
+								</ItemImgBox>
+								<Divider />
+								<ItemTextWrap>
+									<ItemTextBox>
+										<ItemH1>{item.metadata.name}</ItemH1>
+									</ItemTextBox>
+									<ItemTextBox>
+										<ItemH3>Token ID</ItemH3>
+										<ItemH3>#{item.tokenId}</ItemH3>
+									</ItemTextBox>
+									<ItemTextBox>
+										<ItemH3>Edition No.</ItemH3>
+										<ItemH3>
+											#{item.editionNo} / {item.metadata.editionMax}
+										</ItemH3>
+									</ItemTextBox>
+								</ItemTextWrap>
+							</ItemWrap>
+						);
+					})}
 				</Content>
 			</Container>
 		</>
@@ -75,3 +79,8 @@ const MyItem = () => {
 };
 
 export default MyItem;
+
+const Text = styled.p`
+	font-size: 2rem;
+	margin-bottom: 1rem;
+`;

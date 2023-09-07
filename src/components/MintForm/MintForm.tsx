@@ -44,8 +44,6 @@ const MintForm = () => {
 	const [metadata, setMetadata] = useState<GetMetadataResponseData | undefined>(undefined);
 	const [metadataId, setMetadataId] = useState(DEFAULT_METADATA_ID);
 	const [inputData, setInputData] = useState(DEFAULT_INPUT_DATA);
-	const [propertyInput, setPropertyInput] = useState(DEFAULT_PROPERTY_INPUT);
-	const [properties, setProperties] = useRecoilState(PropertiesState);
 
 	const nft = useMint(inputData);
 	const useQueryMetadata = useGetMetatdata(metadataId);
@@ -55,7 +53,6 @@ const MintForm = () => {
 			setMetadata(undefined);
 			setMetadataId(DEFAULT_METADATA_ID);
 			setInputData(DEFAULT_INPUT_DATA);
-			setProperties([]);
 		};
 	}, []);
 
@@ -98,33 +95,13 @@ const MintForm = () => {
 		setMetadataId(e.target.value);
 	};
 
-	const handleOnChangeProperty = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setPropertyInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-	};
-
-	/** Handle Onclick buttons **/
-	const handleOnClickAddProperties = (e: React.MouseEvent) => {
-		e.preventDefault();
-		let inputForm: HTMLFormElement | null = document.querySelector('#add-properties-form');
-
-		// Check if required fields are filled out
-		if (!inputForm!.checkValidity()) {
-			inputForm!.reportValidity();
-			return;
-		}
-
-		setProperties((prev) => [...prev, propertyInput]);
-		inputForm!.reset();
-		setPropertyInput(DEFAULT_PROPERTY_INPUT);
-	};
-
 	const handleOnClickFind = () => {
 		useQueryMetadata.refetch().then((res) => {
 			let data = res.data;
 			if (!!data) {
 				setMetadata(data);
 				setInputData((prev) => ({ ...prev, metadataId: data?.id }));
-				setProperties(data.properties);
+				// setProperties(data.properties);
 			}
 		});
 	};
@@ -250,63 +227,11 @@ const MintForm = () => {
 							/>
 						</InputBox>
 						{/* Input4 end */}
-
-						<InputBox>
-							<InputLabel>Properties</InputLabel>
-							<PropertiesWrap id="properties">
-								{properties.map((property, index) => (
-									<PropertyItem
-										key={index}
-										index={index}
-										property={property}
-										disabled={!!metadata?.id}
-									/>
-								))}
-							</PropertiesWrap>
-						</InputBox>
 						{/* Input4 end */}
 					</TextInputWrap>
 				</Form>
-				{!inputData?.metadataId && (
-					<AddForm id="add-properties-form">
-						<AddWrap>
-							<AddInputWrap>
-								<AddInputBox>
-									<AddInputLabel htmlFor="property-dispaly-type">Display Type</AddInputLabel>:{' '}
-									<AddInput
-										id="property-dispaly-type"
-										name="displayType"
-										onChange={handleOnChangeProperty}
-										required={!inputData?.metadataId}
-									/>
-								</AddInputBox>
-								<AddInputBox>
-									<AddInputLabel htmlFor="property-type">Type</AddInputLabel>:{' '}
-									<AddInput
-										id="property-type"
-										name="type"
-										onChange={handleOnChangeProperty}
-										required={!inputData?.metadataId}
-									/>
-								</AddInputBox>
-								<AddInputBox>
-									<AddInputLabel htmlFor="property-value">Value</AddInputLabel>:{' '}
-									<AddInput
-										id="property-value"
-										name="value"
-										onChange={handleOnChangeProperty}
-										required={!inputData?.metadataId}
-									/>
-								</AddInputBox>
-							</AddInputWrap>
-							<AddIconBox>
-								<AddIcon onClick={handleOnClickAddProperties} />
-							</AddIconBox>
-						</AddWrap>
-					</AddForm>
-				)}
 				<BtnWrap>
-					<Btn onClick={handleOnClickSubmit}>Submit</Btn>
+					<Btn onClick={handleOnClickSubmit}>등록하기</Btn>
 				</BtnWrap>
 			</FormWrap>
 		</Container>
