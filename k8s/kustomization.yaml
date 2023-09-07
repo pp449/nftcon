@@ -1,4 +1,5 @@
-namespace: default
+namespace: krampoline
 resources:
-  - nginx.yaml
-  - frontend.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
