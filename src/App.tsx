@@ -17,7 +17,7 @@ function App() {
 				<Routes>
 					<Route path="/">
 						<Route path="/" element={<HomePage />} />
-						<Route path="/authtoken" element={<AuthTokenForm />} />
+						{/* <Route path="/authtoken" element={<AuthTokenForm />} /> */}
 						<Route path="/mint" element={<MintPage />} />
 						<Route path="/mypage" element={<MyPage />} />
 						<Route path="/item/:itemId" element={<ItemInfoPage />} />
