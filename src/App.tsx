@@ -7,6 +7,8 @@ import ItemInfoPage from './pages/ItemInfoPage';
 import MintPage from './pages/MintPage';
 import MyPage from './pages/MyPage';
 
+const staticServerUrl = 'k3d5b0c62ef97a';
+
 function App() {
 	return (
 		<>
@@ -14,11 +16,11 @@ function App() {
 			<MainContainer>
 				<Routes>
 					<Route path="/">
-						<Route index element={<HomePage />} />
-						<Route path="authtoken" element={<AuthTokenForm />} />
-						<Route path="mint" element={<MintPage />} />
-						<Route path="mypage" element={<MyPage />} />
-						<Route path="item/:itemId" element={<ItemInfoPage />} />
+						<Route path="/" element={<HomePage />} />
+						<Route path="/authtoken" element={<AuthTokenForm />} />
+						<Route path="/mint" element={<MintPage />} />
+						<Route path="/mypage" element={<MyPage />} />
+						<Route path="/item/:itemId" element={<ItemInfoPage />} />
 					</Route>
 				</Routes>
 			</MainContainer>
