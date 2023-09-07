@@ -74,6 +74,9 @@ const Navbar = () => {
 							<MenuLink to="/mypage">마이페이지</MenuLink>
 						</MenuItem>
 						<MenuItem>
+							<MenuLink to="/chart">통계</MenuLink>
+						</MenuItem>
+						<MenuItem>
 							<ConnectButton onClick={handleOnClickConnect} disabled={isConnected}>
 								{buttonText}
 							</ConnectButton>
