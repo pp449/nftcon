@@ -36,7 +36,7 @@ const useMint = (inputData: NFTInputData) => {
 						{
 							displayType: 'number',
 							type: 'price',
-							value: toString(inputData.price),
+							value: inputData.price.toString(),
 						},
 					],
 					onChainProperties: {} as Property,
