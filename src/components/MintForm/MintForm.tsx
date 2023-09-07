@@ -39,6 +39,20 @@ import {
 	DEFAULT_METADATA_ID,
 } from './data';
 import Loading from '../Loading';
+import axios from 'axios';
+// import Config from 'Users/isang-yeob/node/nftcon/src/utils/config';
+
+// const postdata = async () => {
+// 	const res = await axios.post(Config.SERVER_URL + '/api/saleNFT', {
+// 		data: {
+// 			nftInfo: {
+// 				Info: {
+// 					contractAddress: Config.CONTRACT_ID,
+// 				},
+// 			},
+// 		},
+// 	});
+// };
 
 const MintForm = () => {
 	const [metadata, setMetadata] = useState<GetMetadataResponseData | undefined>(undefined);
@@ -59,7 +73,7 @@ const MintForm = () => {
 	if (nft.isLoading) return <Loading />;
 
 	// Implement code when clicking submit or pressing enter
-	const submitData = () => {
+	const submitData = async () => {
 		let inputForm: HTMLFormElement | null = document.querySelector('#create-nft-form');
 
 		// Check if required fields are filled out

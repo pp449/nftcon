@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { mintERC721, uploadMediaFile, uploadMetadata } from '../apis/nft';
@@ -7,6 +7,7 @@ import { KEYS } from '../states/keys';
 import { PropertiesState } from '../states/recoil/properties';
 import { AccountsState } from '../states/recoil/accounts';
 import { getNowYYYYMMDD } from '../utils';
+import Config from '../utils/config';
 
 const useMint = (inputData: NFTInputData) => {
 	const navigate = useNavigate();
@@ -45,12 +46,38 @@ const useMint = (inputData: NFTInputData) => {
 			} else metadataId = inputData.metadataId;
 
 			const nft = await mintERC721(metadataId, inputData.editionNo, accounts[0]);
-
+			console.log('con', Config.CONTRACT_ID);
+			console.log('token', nft.data.data.token.id);
 			return nft;
 		},
 		{
 			retry: false,
-			onSuccess: () => {
+			onSuccess: async (data) => {
+				setTimeout(async () => {
+					const res = await axios.get(
+						`https://api.luniverse.io/svc/v2/nft/contracts/${Config.CONTRACT_ID}/tokens/${data.data.data.token.id}`,
+						{
+							headers: {
+								Authorization: `Bearer ${Config.AUTH_TOKEN}`,
+							},
+						}
+					);
+					const tokenId = res.data.data.token.tokenId;
+					const price = res.data.data.token.metadata.properties[1].value;
+					console.log(tokenId, price);
+					// axios.post(Config.SERVER_URL + '/api/saleNFT', {
+					// 	data: {
+					// 		nftInfo: {
+					// 			Info: {
+					// 				contractAddress: Config.CONTRACT_ID,
+					// 				tokenId,
+					// 				price,
+					// 				discount_rate: Math.floor(Math.random() * 20),
+					// 			},
+					// 		},
+					// 	},
+					// });
+				}, 4000);
 				alert('NFT was minted successfully!');
 				navigate('/mypage');
 			},

@@ -8,8 +8,6 @@ import MintPage from './pages/MintPage';
 import MyPage from './pages/MyPage';
 import ChartPage from './pages/ChartPage';
 
-const staticServerUrl = 'k3d5b0c62ef97a';
-
 function App() {
 	return (
 		<>
@@ -17,7 +15,7 @@ function App() {
 			<MainContainer>
 				<Routes>
 					<Route path="/">
-						<Route path="/" element={<HomePage />} />
+						<Route index element={<HomePage />} />
 						{/* <Route path="/authtoken" element={<AuthTokenForm />} /> */}
 						<Route path="/chart" element={<ChartPage />} />
 						<Route path="/mint" element={<MintPage />} />
