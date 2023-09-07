@@ -1,30 +1,29 @@
-import styled from "styled-components";
-import { Link as LinkR } from "react-router-dom";
-import { MdArrowForward, MdKeyboardArrowRight } from "react-icons/md";
+import styled from 'styled-components';
+import { Link as LinkR } from 'react-router-dom';
+import { MdArrowForward, MdKeyboardArrowRight } from 'react-icons/md';
 
 export const Container = styled.section`
-	${({ theme }) => theme.mixins.flexBox("row", "center", "center")}
+	${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')}
 	position: relative;
 	width: 100vw;
-	min-height: calc(100vh - ${({ theme }) => theme.height.navbar});
+	height: 100vh;
 	z-index: ${({ theme }) => theme.zIndex.container};
 	transition: all 0.3s ease-in-out;
 
 	&::before {
-		content: "";
+		content: '';
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: ${({theme}) => theme.color.bg};
-		opacity: 0.1;
+		background: ${({ theme }) => theme.color.orange};
 		z-index: calc(${({ theme }) => theme.zIndex.container} + 1);
 	}
 `;
 
 export const BgWrap = styled.div`
-	${({ theme }) => theme.mixins.flexBox("row", "center", "center")}
+	${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')}
 	position: absolute;
 	top: 0;
 	width: 100%;
@@ -43,15 +42,14 @@ export const Content = styled.div`
 	max-width: ${({ theme }) => theme.width.sm};
 	z-index: ${({ theme }) => theme.zIndex.content};
 	padding: 2rem;
+	text-align: center;
 `;
 
-export const TextWrap = styled.div`
-	
-`;
+export const TextWrap = styled.div``;
 
 export const H1 = styled.h1`
 	color: ${({ theme }) => theme.color.white};
-	font-size: 3rem;
+	font-size: 2.5rem;
 	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 	/* text-align: center; */
 
@@ -80,14 +78,18 @@ export const P = styled.p`
 `;
 
 export const BtnWrap = styled.div`
-	${({ theme }) => theme.mixins.flexBox("row", "flex-end", "center")}
+	text-align: center;
+	align-items: center;
+	${({ theme }) => theme.mixins.flexBox('row', 'flex-end', 'center')}
 	margin-top: 2rem;
+	justify-content: center;
 `;
 
 export const Btn = styled(LinkR)`
-	${({ theme }) => theme.mixins.flexBox("row", "flex-end", "center")}
+	${({ theme }) => theme.mixins.flexBox('row', 'flex-end', 'center')}
 	border-radius: 1rem;
-	background: ${({ theme }) => theme.color.tertiary};
+	background: none;
+	border: 1px solid white;
 	padding: 1rem 2rem;
 	white-space: nowrap;
 	text-decoration: none;
