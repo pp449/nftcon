@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import useMint from "../../hooks/useMint";
-import useGetMetatdata from "../../hooks/useGetMetadata";
-import { PropertiesState } from "../../states/recoil/properties";
-import PropertyItem from "./PropertyItem";
+import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import useMint from '../../hooks/useMint';
+import useGetMetatdata from '../../hooks/useGetMetadata';
+import { PropertiesState } from '../../states/recoil/properties';
+import PropertyItem from './PropertyItem';
 import {
 	AddIcon,
 	Btn,
@@ -31,13 +31,18 @@ import {
 	UploadImgTitle,
 	AddWrap,
 	MetadataInputBox,
-} from "./styled";
-import {DEFAULT_INPUT_DATA, DEFAULT_PROPERTY_INPUT, DEFAULT_MAX_MINT_LIMIT, DEFAULT_METADATA_ID} from "./data"
-import Loading from "../Loading";
+} from './styled';
+import {
+	DEFAULT_INPUT_DATA,
+	DEFAULT_PROPERTY_INPUT,
+	DEFAULT_MAX_MINT_LIMIT,
+	DEFAULT_METADATA_ID,
+} from './data';
+import Loading from '../Loading';
 
 const MintForm = () => {
-	const [metadata, setMetadata] = useState<GetMetadataResponseData | undefined>(undefined)
-	const [metadataId, setMetadataId] = useState(DEFAULT_METADATA_ID)
+	const [metadata, setMetadata] = useState<GetMetadataResponseData | undefined>(undefined);
+	const [metadataId, setMetadataId] = useState(DEFAULT_METADATA_ID);
 	const [inputData, setInputData] = useState(DEFAULT_INPUT_DATA);
 	const [propertyInput, setPropertyInput] = useState(DEFAULT_PROPERTY_INPUT);
 	const [properties, setProperties] = useRecoilState(PropertiesState);
@@ -46,20 +51,19 @@ const MintForm = () => {
 	const useQueryMetadata = useGetMetatdata(metadataId);
 
 	useEffect(() => {
-		return () =>{
-			setMetadata(undefined)
-			setMetadataId(DEFAULT_METADATA_ID)
-			setInputData(DEFAULT_INPUT_DATA)
-			setProperties([])
-		}
-	}, [])
+		return () => {
+			setMetadata(undefined);
+			setMetadataId(DEFAULT_METADATA_ID);
+			setInputData(DEFAULT_INPUT_DATA);
+			setProperties([]);
+		};
+	}, []);
 
-	if (nft.isLoading) return <Loading/>
+	if (nft.isLoading) return <Loading />;
 
 	// Implement code when clicking submit or pressing enter
 	const submitData = () => {
-		let inputForm: HTMLFormElement | null =
-			document.querySelector("#create-nft-form");
+		let inputForm: HTMLFormElement | null = document.querySelector('#create-nft-form');
 
 		// Check if required fields are filled out
 		if (!inputForm!.checkValidity()) {
@@ -74,27 +78,24 @@ const MintForm = () => {
 	const handleOnChangeImgUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 		const file = e.target.files![0];
-		const uploadImg: HTMLImageElement | null =
-			document.querySelector("#upload-img");
+		const uploadImg: HTMLImageElement | null = document.querySelector('#upload-img');
 		uploadImg!.src = URL.createObjectURL(file);
 		const formData = new FormData();
-		formData.append("file", file);
+		formData.append('file', file);
 
-		const fileNameLabel: HTMLLabelElement | null = document.querySelector(
-			"#upload-img-filename"
-		);
+		const fileNameLabel: HTMLLabelElement | null = document.querySelector('#upload-img-filename');
 		fileNameLabel!.textContent = file.name;
 		setInputData((prev) => ({ ...prev, image: formData }));
 	};
 
-	const handleOnChangeMetadata = async (e: React.ChangeEvent<HTMLInputElement>) => {
-		setMetadataId(e.target.value)
-	}
-
 	const handleOnChangeInputData = (e: React.ChangeEvent<HTMLInputElement>) => {
-		let value: string | number = e.target.value
-		if(e.target.type === "number") value = e.target.valueAsNumber
+		let value: string | number = e.target.value;
+		if (e.target.type === 'number') value = e.target.valueAsNumber;
 		setInputData((prev) => ({ ...prev, [e.target.name]: value }));
+	};
+
+	const handleOnChangeMetadata = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		setMetadataId(e.target.value);
 	};
 
 	const handleOnChangeProperty = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,9 +105,7 @@ const MintForm = () => {
 	/** Handle Onclick buttons **/
 	const handleOnClickAddProperties = (e: React.MouseEvent) => {
 		e.preventDefault();
-		let inputForm: HTMLFormElement | null = document.querySelector(
-			"#add-properties-form"
-		);
+		let inputForm: HTMLFormElement | null = document.querySelector('#add-properties-form');
 
 		// Check if required fields are filled out
 		if (!inputForm!.checkValidity()) {
@@ -121,14 +120,14 @@ const MintForm = () => {
 
 	const handleOnClickFind = () => {
 		useQueryMetadata.refetch().then((res) => {
-			let data = res.data
-			if(!!data) {
-				setMetadata(data)
-				setInputData(prev => ({...prev, metadataId: data?.id}))
-				setProperties(data.properties)
+			let data = res.data;
+			if (!!data) {
+				setMetadata(data);
+				setInputData((prev) => ({ ...prev, metadataId: data?.id }));
+				setProperties(data.properties);
 			}
-		})
-	}
+		});
+	};
 
 	const handleOnClickSubmit = (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -138,8 +137,8 @@ const MintForm = () => {
 	return (
 		<Container>
 			<FormWrap>
-				<Title>Create Your NFT</Title>
-				<Form id="create-nft-form" >
+				<Title>판매할 상품을 등록해주세요</Title>
+				<Form id="create-nft-form">
 					<ImgInputWrap>
 						<ImgUploadBox>
 							<ImgUploadLabel
@@ -147,7 +146,10 @@ const MintForm = () => {
 								id="img-upload-label"
 								isSelected={!!inputData.image || !!inputData.metadataId}
 							>
-								<UploadImg src={!!metadata ? metadata.image : "/assets/images/upload.png"} id="upload-img" />
+								<UploadImg
+									src={!!metadata ? metadata.image : '/assets/images/upload.png'}
+									id="upload-img"
+								/>
 								<UploadImgTitle htmlFor="img-upload" id="upload-img-filename" />
 							</ImgUploadLabel>
 							<ImgUploadInput
@@ -155,15 +157,13 @@ const MintForm = () => {
 								type="file"
 								accept="image/*"
 								onChange={(input) => handleOnChangeImgUpload(input)}
-								required = {!inputData?.metadataId}
+								required={!inputData?.metadataId}
 							/>
 						</ImgUploadBox>
 					</ImgInputWrap>
 					<TextInputWrap>
-						<InputBox>
-							<InputLabel htmlFor="metadata-id" >
-								Metadata ID
-							</InputLabel>
+						{/* <InputBox>
+							<InputLabel htmlFor="metadata-id">Metadata ID</InputLabel>
 							<MetadataInputBox>
 								<Input
 									id="metadata-id"
@@ -175,39 +175,66 @@ const MintForm = () => {
 									Find
 								</Btn>
 							</MetadataInputBox>
-						</InputBox>
+						</InputBox> */}
 						{/* Input1 end */}
 						<InputBox>
 							<InputLabel htmlFor="nft-name" required={true}>
-								Name
+								판매물품
 							</InputLabel>
 							<Input
 								id="nft-name"
 								name="name"
 								onChange={handleOnChangeInputData}
-								defaultValue={metadata?.name || ""}
-								required = {!inputData?.metadataId}
+								defaultValue={metadata?.name || ''}
+								required={!inputData?.metadataId}
 								disabled={!!metadata?.id}
 							/>
 						</InputBox>
 						{/* Input2 end */}
 						<InputBox>
 							<InputLabel htmlFor="nft-description" required={true}>
-								Description
+								물품 설명
 							</InputLabel>
 							<Input
 								id="nft-description"
 								name="description"
 								onChange={handleOnChangeInputData}
-								defaultValue={metadata?.description || ""}
-								required = {!inputData?.metadataId}
+								defaultValue={metadata?.description || ''}
+								required={!inputData?.metadataId}
+								disabled={!!metadata?.id}
+							/>
+						</InputBox>
+						<InputBox>
+							<InputLabel htmlFor="nft-price" required={true}>
+								물품 가격
+							</InputLabel>
+							<Input
+								id="nft-price"
+								name="price"
+								type="number"
+								onChange={handleOnChangeInputData}
+								defaultValue={0}
+								required={!inputData?.metadataId}
+								disabled={!!metadata?.id}
+							/>
+						</InputBox>
+						<InputBox>
+							<InputLabel htmlFor="nft-price" required={true}>
+								위치
+							</InputLabel>
+							<Input
+								id="location"
+								name="location"
+								onChange={handleOnChangeInputData}
+								defaultValue={''}
+								required={!inputData?.metadataId}
 								disabled={!!metadata?.id}
 							/>
 						</InputBox>
 						{/* Input3 end */}
 						<InputBox>
 							<InputLabel htmlFor="max-mint-limit" required={true}>
-								Max Mint Limit
+								총 발행 갯수
 							</InputLabel>
 							<Input
 								id="max-mint-limit"
@@ -218,7 +245,7 @@ const MintForm = () => {
 								key={metadata?.editionMax}
 								defaultValue={metadata?.editionMax || DEFAULT_MAX_MINT_LIMIT}
 								onChange={handleOnChangeInputData}
-								required = {!inputData?.metadataId}
+								required={!inputData?.metadataId}
 								disabled={!!metadata?.id}
 							/>
 						</InputBox>
@@ -228,53 +255,58 @@ const MintForm = () => {
 							<InputLabel>Properties</InputLabel>
 							<PropertiesWrap id="properties">
 								{properties.map((property, index) => (
-									<PropertyItem key={index} index={index} property={property} disabled={!!metadata?.id} />
+									<PropertyItem
+										key={index}
+										index={index}
+										property={property}
+										disabled={!!metadata?.id}
+									/>
 								))}
 							</PropertiesWrap>
 						</InputBox>
 						{/* Input4 end */}
 					</TextInputWrap>
 				</Form>
-				{!inputData?.metadataId && <AddForm id="add-properties-form">
-					<AddWrap>
-						<AddInputWrap>
-							<AddInputBox>
-								<AddInputLabel htmlFor="property-dispaly-type">Display Type</AddInputLabel>:{" "}
-								<AddInput
-									id="property-dispaly-type"
-									name="displayType"
-									onChange={handleOnChangeProperty}
-									required = {!inputData?.metadataId}
-								/>
-							</AddInputBox>
-							<AddInputBox>
-								<AddInputLabel htmlFor="property-type">Type</AddInputLabel>:{" "}
-								<AddInput
-									id="property-type"
-									name="type"
-									onChange={handleOnChangeProperty}
-									required = {!inputData?.metadataId}
-								/>
-							</AddInputBox>
-							<AddInputBox>
-								<AddInputLabel htmlFor="property-value" >Value</AddInputLabel>:{" "}
-								<AddInput
-									id="property-value"
-									name="value"
-									onChange={handleOnChangeProperty}
-									required = {!inputData?.metadataId}
-								/>
-							</AddInputBox>
-						</AddInputWrap>
-						<AddIconBox>
-							<AddIcon onClick={handleOnClickAddProperties} />
-						</AddIconBox>
-					</AddWrap>
-				</AddForm>}
+				{!inputData?.metadataId && (
+					<AddForm id="add-properties-form">
+						<AddWrap>
+							<AddInputWrap>
+								<AddInputBox>
+									<AddInputLabel htmlFor="property-dispaly-type">Display Type</AddInputLabel>:{' '}
+									<AddInput
+										id="property-dispaly-type"
+										name="displayType"
+										onChange={handleOnChangeProperty}
+										required={!inputData?.metadataId}
+									/>
+								</AddInputBox>
+								<AddInputBox>
+									<AddInputLabel htmlFor="property-type">Type</AddInputLabel>:{' '}
+									<AddInput
+										id="property-type"
+										name="type"
+										onChange={handleOnChangeProperty}
+										required={!inputData?.metadataId}
+									/>
+								</AddInputBox>
+								<AddInputBox>
+									<AddInputLabel htmlFor="property-value">Value</AddInputLabel>:{' '}
+									<AddInput
+										id="property-value"
+										name="value"
+										onChange={handleOnChangeProperty}
+										required={!inputData?.metadataId}
+									/>
+								</AddInputBox>
+							</AddInputWrap>
+							<AddIconBox>
+								<AddIcon onClick={handleOnClickAddProperties} />
+							</AddIconBox>
+						</AddWrap>
+					</AddForm>
+				)}
 				<BtnWrap>
-					<Btn onClick={handleOnClickSubmit}>
-						Submit
-					</Btn>
+					<Btn onClick={handleOnClickSubmit}>Submit</Btn>
 				</BtnWrap>
 			</FormWrap>
 		</Container>
