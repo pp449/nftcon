@@ -1,18 +1,17 @@
-import styled from "styled-components";
-import { Link as LinkR } from "react-router-dom";
+import styled from 'styled-components';
+import { Link as LinkR } from 'react-router-dom';
 
 export const Container = styled.div`
-	${({ theme }) => theme.mixins.flexBox("row", "center", "center")}
+	${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')}
 	width: 100%;
 	height: ${({ theme }) => theme.height.navbar};
-	position: fixed;
 	top: 0;
-	background: ${({ theme }) => theme.color.primary};
-	z-index: ${({theme}) => theme.zIndex.navbar};
+	background: ${({ theme }) => theme.color.orange};
+	z-index: ${({ theme }) => theme.zIndex.navbar};
 `;
 
 export const Nav = styled.nav`
-	${({ theme }) => theme.mixins.flexBox("row", "space-between", "center")}
+	${({ theme }) => theme.mixins.flexBox('row', 'space-between', 'center')}
 	position: relative;
 	width: 100%;
 	height: ${({ theme }) => theme.height.navbar};
@@ -20,7 +19,7 @@ export const Nav = styled.nav`
 `;
 
 export const Logo = styled(LinkR)`
-	${({ theme }) => theme.mixins.flexBox("row", "center", "center")}
+	${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')}
 	width: 15rem;
 	height: ${({ theme }) => theme.height.navbar};
 	text-decoration: none;
@@ -38,7 +37,7 @@ export const LogoImg = styled.img`
 
 export const LogoH1 = styled.h1`
 	font-size: 1.5rem;
-	font-weight: ${({theme}) => theme.fontWeight.semiBold};
+	font-weight: ${({ theme }) => theme.fontWeight.semiBold};
 	color: ${({ theme }) => theme.color.white};
 `;
 
@@ -54,8 +53,8 @@ export const OpenMenu = styled.div`
 `;
 
 export const Menu = styled.ul`
-	${({ theme }) => theme.mixins.flexBox("row", "center", "center")}
-  gap: 1rem;
+	${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')}
+	gap: 1rem;
 
 	@media ${({ theme }) => theme.breakpoint.md} {
 		display: none;
@@ -63,40 +62,40 @@ export const Menu = styled.ul`
 `;
 
 export const MenuItem = styled.li`
-  height: 100%;
+	height: 100%;
 	list-style: none;
 `;
 
 export const MenuLink = styled(LinkR)`
-  font-size: 1rem;
+	font-size: 1rem;
 	text-decoration: none;
-  color: ${({theme}) => theme.color.white};
-  cursor: pointer;
+	color: ${({ theme }) => theme.color.white};
+	cursor: pointer;
 
-  &:hover {
-    color: ${({theme}) => theme.color.quinary};
-  }
+	&:hover {
+		color: ${({ theme }) => theme.color.quinary};
+	}
 `;
 
 export const ConnectButton = styled.button`
 	padding: 0.5rem;
-	border: 2px solid ${({theme}) => theme.color.white};
+	border: 2px solid ${({ theme }) => theme.color.white};
 	border-radius: 0.5rem;
 	background: none;
 	font-size: 1rem;
 	text-decoration: none;
-  color: ${({theme}) => theme.color.white};
+	color: ${({ theme }) => theme.color.white};
 	cursor: pointer;
 	&:hover {
-    color: ${({theme}) => theme.color.quinary};
-    border: 2px solid ${({theme}) => theme.color.quinary};
-  }
+		color: ${({ theme }) => theme.color.quinary};
+		border: 2px solid ${({ theme }) => theme.color.quinary};
+	}
 
 	&:disabled {
 		cursor: default;
 		&:hover {
-			color: ${({theme}) => theme.color.white};
-			border: 2px solid ${({theme}) => theme.color.white};
+			color: ${({ theme }) => theme.color.white};
+			border: 2px solid ${({ theme }) => theme.color.white};
 		}
 	}
 `;
