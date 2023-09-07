@@ -16,11 +16,11 @@ function App() {
 			<MainContainer>
 				<Routes>
 					<Route path="/">
-						<Route path={staticServerUrl + "/"} element={<HomePage />} />
-						<Route path={staticServerUrl + "/authtoken"} element={<AuthTokenForm />} />
-						<Route path={staticServerUrl + "/mint"} element={<MintPage />} />
-						<Route path={staticServerUrl + "/mypage"} element={<MyPage />} />
-						<Route path={staticServerUrl + "/item/:itemId"} element={<ItemInfoPage />} />
+						<Route path={"/"} element={<HomePage />} />
+						<Route path={"/authtoken"} element={<AuthTokenForm />} />
+						<Route path={"/mint"} element={<MintPage />} />
+						<Route path={"/mypage"} element={<MyPage />} />
+						<Route path={"/item/:itemId"} element={<ItemInfoPage />} />
 					</Route>
 				</Routes>
 			</MainContainer>
