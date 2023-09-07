@@ -7,7 +7,7 @@ import ItemInfoPage from './pages/ItemInfoPage';
 import MintPage from './pages/MintPage';
 import MyPage from './pages/MyPage';
 
-const staticServerUrl = import.meta.env.VITE_URL;
+const staticServerUrl = 'k3d5b0c62ef97a';
 
 function App() {
 	return (
