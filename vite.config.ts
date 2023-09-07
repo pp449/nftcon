@@ -6,7 +6,7 @@ const staticServerUri = "k3d5b0c62ef97a";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: `/${staticServerUri}`,
+  base: `/${staticServerUri}/`,
   plugins: [react()]
 })
 

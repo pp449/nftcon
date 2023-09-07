@@ -7,9 +7,9 @@ metadata:
 spec:
   ports:
     - name: 3000-3000
-      port: 5173
+      port: 3000
       protocol: TCP
-      targetPort: 5173
+      targetPort: 3000
   selector:
     app: frontend
   type: LoadBalancer
