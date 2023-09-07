@@ -7,6 +7,8 @@ import ItemInfoPage from './pages/ItemInfoPage';
 import MintPage from './pages/MintPage';
 import MyPage from './pages/MyPage';
 
+const staticServerUrl = import.meta.env.VITE_URL;
+
 function App() {
 	return (
 		<>
@@ -14,11 +16,11 @@ function App() {
 			<MainContainer>
 				<Routes>
 					<Route path="/">
-						<Route index element={<HomePage />} />
-						<Route path="authtoken" element={<AuthTokenForm />} />
-						<Route path="mint" element={<MintPage />} />
-						<Route path="mypage" element={<MyPage />} />
-						<Route path="item/:itemId" element={<ItemInfoPage />} />
+						<Route path={staticServerUrl + "/"} element={<HomePage />} />
+						<Route path={staticServerUrl + "/authtoken"} element={<AuthTokenForm />} />
+						<Route path={staticServerUrl + "/mint"} element={<MintPage />} />
+						<Route path={staticServerUrl + "/mypage"} element={<MyPage />} />
+						<Route path={staticServerUrl + "/item/:itemId"} element={<ItemInfoPage />} />
 					</Route>
 				</Routes>
 			</MainContainer>
