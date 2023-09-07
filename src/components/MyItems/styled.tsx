@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.main`
 	${({ theme }) => theme.components.container('column', 'flex-start', 'center')}
-	padding-top: 3rem;
+	padding: 3rem 0 3rem 0;
 `;
 
 export const Content = styled.div`
