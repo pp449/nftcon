@@ -46,8 +46,6 @@ const useMint = (inputData: NFTInputData) => {
 			} else metadataId = inputData.metadataId;
 
 			const nft = await mintERC721(metadataId, inputData.editionNo, accounts[0]);
-			console.log('con', Config.CONTRACT_ID);
-			console.log('token', nft.data.data.token.id);
 			return nft;
 		},
 		{
@@ -65,20 +63,20 @@ const useMint = (inputData: NFTInputData) => {
 					const tokenId = res.data.data.token.tokenId;
 					const price = res.data.data.token.metadata.properties[1].value;
 					console.log(tokenId, price);
-					// axios.post(Config.SERVER_URL + '/api/saleNFT', {
-					// 	data: {
-					// 		nftInfo: {
-					// 			Info: {
-					// 				contractAddress: Config.CONTRACT_ID,
-					// 				tokenId,
-					// 				price,
-					// 				discount_rate: Math.floor(Math.random() * 20),
-					// 			},
-					// 		},
-					// 	},
-					// });
+					axios.post(Config.SERVER_URL + '/saleNFT', {
+						data: {
+							nftInfo: {
+								Info: {
+									contractAddress: Config.CONTRACT_ID,
+									tokenId,
+									price,
+									discount_rate: Math.floor(Math.random() * 20),
+								},
+							},
+						},
+					});
 				}, 4000);
-				alert('NFT was minted successfully!');
+				alert('판매등록 완료!');
 				navigate('/mypage');
 			},
 			onError: (error: AxiosError<AxiosErrorData>) => {

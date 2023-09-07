@@ -19,7 +19,7 @@ namespace Config {
 	export const NFT_METADATA_URL = '/nft/metadata';
 	export const NFT_TOKENS_URL = `/nft/contracts/${CONTRACT_ID}/tokens`;
 
-	export const SERVER_URL = 'http://localhost:8080';
+	export const SERVER_URL = 'https://pzuil-kfyvjejdhp.krampoline.com';
 }
 
 export default Config;
