@@ -59,13 +59,13 @@ const MyItem = () => {
 										<ItemH1>{item.metadata.name}</ItemH1>
 									</ItemTextBox>
 									<ItemTextBox>
-										<ItemH3>Token ID</ItemH3>
-										<ItemH3>#{item.tokenId}</ItemH3>
+										<ItemH3>설명</ItemH3>
+										<ItemH3>{item.metadata.description}</ItemH3>
 									</ItemTextBox>
 									<ItemTextBox>
-										<ItemH3>Edition No.</ItemH3>
+										<ItemH3>금액</ItemH3>
 										<ItemH3>
-											#{item.editionNo} / {item.metadata.editionMax}
+											{item.metadata.properties[1] ? item.metadata.properties[1].value : '가격미상'}
 										</ItemH3>
 									</ItemTextBox>
 								</ItemTextWrap>
