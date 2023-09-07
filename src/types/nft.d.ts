@@ -13,6 +13,8 @@ declare global {
 		image: FormData | null;
 		name: string;
 		description: string;
+		price: string;
+		location: string;
 		maxMintLimit: number;
 		editionNo: number;
 		metadataId?: string;
