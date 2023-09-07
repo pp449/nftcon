@@ -1,18 +1,14 @@
-import React from "react"
-import { Route, Routes } from "react-router-dom"
-import MainContainer from "./components/MainContainer";
-import AuthTokenForm from "./components/AuthTokenForm"
-import Navbar from "./components/Navbar"
-import HomePage from "./pages/HomePage"
-import ItemInfoPage from "./pages/ItemInfoPage"
-import MintPage from "./pages/MintPage"
-import MyPage from "./pages/MyPage"
-import Footer from "./components/Footer";
+import { Route, Routes } from 'react-router-dom';
+import MainContainer from './components/MainContainer';
+import AuthTokenForm from './components/AuthTokenForm';
+import Navbar from './components/Navbar';
+import HomePage from './pages/HomePage';
+import ItemInfoPage from './pages/ItemInfoPage';
+import MintPage from './pages/MintPage';
+import MyPage from './pages/MyPage';
 
 function App() {
-	
-
-  return (
+	return (
 		<>
 			<Navbar />
 			<MainContainer>
@@ -26,9 +22,8 @@ function App() {
 					</Route>
 				</Routes>
 			</MainContainer>
-			<Footer />
 		</>
 	);
 }
 
-export default App
+export default App;
