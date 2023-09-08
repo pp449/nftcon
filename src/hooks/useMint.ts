@@ -80,7 +80,7 @@ const useMint = (inputData: NFTInputData) => {
 				navigate('/mypage');
 			},
 			onError: (error: AxiosError<AxiosErrorData>) => {
-				alert(`Failed to mint. \n${error.message}\n${error.response?.data.message}`);
+				alert(`판매등록 실패. \n${error.message}\n${error.response?.data.message}`);
 				window.location.reload();
 			},
 		}
