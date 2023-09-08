@@ -52,6 +52,7 @@ const useMint = (inputData: NFTInputData) => {
 			retry: false,
 			onSuccess: async (data) => {
 				setTimeout(async () => {
+					if (!data) return;
 					const res = await axios.get(
 						`https://api.luniverse.io/svc/v2/nft/contracts/${Config.CONTRACT_ID}/tokens/${data.data.data.token.id}`,
 						{
